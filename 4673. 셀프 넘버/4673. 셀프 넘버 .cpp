@@ -21,13 +21,14 @@ int d(int n)
 int main()
 {
 	int n = 10001;
-	bool boo[10001] = {};
+	int num;
+	bool* boo = new bool[n] {};
 
 	for (int i = 1; i < n; i++)
 	{
-		int num = d(i);
+		num = d(i);
 
-		if (num <= n)
+		if (num < n)
 		{
 			boo[num] = true;
 		}
