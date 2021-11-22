@@ -1,25 +1,44 @@
 #include <iostream>
 using namespace std;
 
-// n = 91
-// d(n) = n+(n/10)+(n%10)
-// 101 = 91+9+1
-long d(int n)
+int d(int n)
 {
-	int npl;
-	
-	for(int i=10; i<10000; i=i*10)
+	int npl = n;
+
+	while(1)
 	{
-		npl = n + (n / i) + (n % i);
+		npl += (n % 10);
+
+		n = n / 10;
+
+		if (n <= 0) break;
 	}
+
+	return npl;
+	
 }
 
 int main()
 {
-	int n;
+	int n = 10001;
+	bool boo[10001] = {};
 
-	for (int i = 0; i <= 10000; i++)
+	for (int i = 1; i < n; i++)
 	{
-		cout << d(n);
+		int num = d(i);
+
+		if (num <= n)
+		{
+			boo[num] = true;
+		}
 	}
+
+	for (int i = 1; i < n; i++)
+	{
+		if (!boo[i])
+		{
+			cout << i << "\n";
+		}
+	}
+	return 0;
 }
