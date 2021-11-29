@@ -15,7 +15,6 @@ int main()
 	{
 		cin >> R;
 		if (R > 8) R = 8;
-		cout << " ";
 		cin >> S;
 
 		for (int j = 0; j < S.length(); j++)
