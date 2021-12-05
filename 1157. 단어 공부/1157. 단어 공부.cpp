@@ -4,63 +4,36 @@ using namespace std;
 
 int main()
 {
-	string a;
+	char word[1000001] = {};
+	int alpha[26];
+	int num, max, select;
 
-	cin >> a;
-	
-	int leng = a.length();
-	int* c = new int[leng];
-	int max = -1;
-	char max_c = '?';
-	
-	// 대문자로 변환
-	for (int i = 0; i < leng; i++)
-	{
-		a[i] = toupper(a[i]);
-	}
+	cin >> word;
 
-	// 같은 글자면 ++
-	for (int i = 0; i < leng; i++)
+	for(int i=0; i<=strlen(word); i++)
 	{
-		for(int j = 0; j < leng; j++)
+		if (word[i] > 'A' && word[i] <= 'Z')
 		{
-			if (a[i] == a[i + j])
-			{
-				c[i]++;
-			}
+			num = word[i] - 'A';
+		}
+		else if (word[i] >= 'a' && word[i] <= 'z')
+		{
+			num = word[i] - 'a';
 		}
 
-		if (c[i] == 0)
-		{
-			max_c = '?';
-		}
+		alpha[num]++;
 	}
-	
-	// 제일 많은 글자 찾기
-	for (int i = 0; i < leng; i++)
+
+	max = alpha[0];
+
+	for (int i = 1; i < 26; i++)
 	{
-		for (int j = 0; j < leng; j++)
+		if (max < alpha[i])
 		{
-			if (c[i] < c[i + j])
-			{
-				max = c[i + j];
-			}
-			else
-			{
-				max = c[i];
-			}
-
-			if (c[i] == c[i + j] && a[i] != a[i + j])
-			{
-				max_c = a[i];
-			}
-
-			if (c[i] == c[i + j] && a[i] == a[i + j])
-			{
-				max_c = '?';
-			}
+			max = alpha[i];
+			select = i;
 		}
 	}
 
-	cout << max_c;
+
 }
