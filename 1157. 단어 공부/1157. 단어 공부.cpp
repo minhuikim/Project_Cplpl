@@ -1,39 +1,50 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 int main()
 {
-	char word[1000001] = {};
-	int alpha[26];
-	int num, max, select;
+	char text[1000000];
+	char* pt;
+	int alpha[26] = {0};
+	int az, max;
+	bool flag;
 
-	cin >> word;
+	cin >> text;
 
-	for(int i=0; i<=strlen(word); i++)
+	pt = text;
+	while (*pt)
 	{
-		if (word[i] > 'A' && word[i] <= 'Z')
+		if (*pt >= 'a' && *pt <= 'z')
 		{
-			num = word[i] - 'A';
+			*pt = *pt - 'a' + 'A';
 		}
-		else if (word[i] >= 'a' && word[i] <= 'z')
-		{
-			num = word[i] - 'a';
-		}
-
-		alpha[num]++;
+		alpha[*pt - 65]++;
+		pt++;
 	}
 
-	max = alpha[0];
-
-	for (int i = 1; i < 26; i++)
+	max = 0;
+	for (int i = 0; i < 26; i++)
 	{
 		if (max < alpha[i])
 		{
 			max = alpha[i];
-			select = i;
+			az = i;
+			flag = true;
+		}
+		else if (max == alpha[i])
+		{
+			flag = false;
 		}
 	}
 
+	if (flag)
+	{
+		cout << char(az + 65);
+	}
+	else
+	{
+		cout << "?";
+	}
 
+	return 0;
 }
