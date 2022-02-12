@@ -2,24 +2,43 @@
 #include <string>
 using namespace std;
 
-void push(int *stack, int a)
+/* 
+* @parameter 배열, 배열 크기, 입력할 요소
+*/
+void push(int* stack, int n, int a)
 {
-	cout << sizeof(stack) << "\n";
-	for (int j = 0; j < sizeof(stack); j++)
+	for (int j = 0; j < n; j++)
 	{
+		if (stack[j] < 0)
+		{
+			stack[j] = a;
+			break;
+		}
 	}
-	cout << stack[0] << "\n";
-	cout << a;
 }
 
-int pop(int* stack)
+int pop(int* stack, int n)
 {
-	return 111;
+	for (int j = 0; j < n; j++)
+	{
+		if (stack[j] < 0)
+		{
+			return stack[j-1];
+			break;
+		}
+	}
 }
 
-int size()
+int size(int* stack, int n)
 {
-	return 0;
+	for (int j = 0; j < n; j++)
+	{
+		if (stack[j] < 0)
+		{
+			return j;
+			break;
+		}
+	}
 }
 
 int empty()
@@ -44,6 +63,7 @@ int main()
 
 	// 명령 회수만큼 스택 배열 크기 생성
 	int* stack = new int[n];
+	//int stack[10000] = {0};
 	//stack[n] = { -1 };
 
 	for (int i = 0; i < n; i++)
@@ -55,12 +75,20 @@ int main()
 		if (order.find("push") == 0)
 		{
 			cin >> pnum;
-			push(stack, pnum);
+			push(stack, n, pnum);
 		}
 
 		if (order == "pop")
 		{
-			cout << pop(stack);
+			cout << pop(stack, n) << "\n";
+		}
+
+		if (order == "size")
+		{
+			if (stack[0] > 0)
+				cout << size(stack, n) << "\n";
+			else
+				cout << 0 << "\n";
 		}
 	}
 }
