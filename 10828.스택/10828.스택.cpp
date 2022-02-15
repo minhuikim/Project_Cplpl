@@ -9,7 +9,7 @@ void push(int* stack, int n, int a)
 {
 	for (int j = 0; j < n; j++)
 	{
-		if (stack[j] < 0)
+		if (stack[j] <= 0)
 		{
 			stack[j] = a;
 			break;
@@ -19,21 +19,29 @@ void push(int* stack, int n, int a)
 
 int pop(int* stack, int n)
 {
+	int popn = 0;
 	for (int j = 0; j < n; j++)
 	{
-		if (stack[j] < 0)
+		if (stack[j] <= 0)
 		{
-			return stack[j-1];
+			if (j == 0)
+			{
+				popn = -1;
+				break;
+			}
+			popn = stack[j - 1];
+			stack[j - 1] = 0;
 			break;
 		}
 	}
+	return popn;
 }
 
 int size(int* stack, int n)
 {
 	for (int j = 0; j < n; j++)
 	{
-		if (stack[j] < 0)
+		if (stack[j] <= 0)
 		{
 			return j;
 			break;
@@ -41,14 +49,31 @@ int size(int* stack, int n)
 	}
 }
 
-int empty()
+int empty(int* stack, int n)
 {
-	return 0;
+	if (stack[0] <= 0)
+		return 1;
+	else
+		return 0;
 }
 
-int top()
+int top(int* stack, int n)
 {
-	return 0;
+	int topn = 0;
+	for (int j = 0; j < n; j++)
+	{
+		if (stack[j] <= 0)
+		{
+			if (j == 0)
+			{
+				topn = -1;
+				break;
+			}
+			topn = stack[j - 1];
+			break;
+		}
+	}
+	return topn;
 }
 
 int* stack;
@@ -63,8 +88,6 @@ int main()
 
 	// 명령 회수만큼 스택 배열 크기 생성
 	int* stack = new int[n];
-	//int stack[10000] = {0};
-	//stack[n] = { -1 };
 
 	for (int i = 0; i < n; i++)
 	{
@@ -85,10 +108,17 @@ int main()
 
 		if (order == "size")
 		{
-			if (stack[0] > 0)
-				cout << size(stack, n) << "\n";
-			else
-				cout << 0 << "\n";
+			cout << size(stack, n) << "\n";
+		}
+
+		if (order == "empty")
+		{
+			cout << empty(stack, n) << "\n";
+		}
+
+		if (order == "top")
+		{
+			cout << top(stack, n) << "\n";
 		}
 	}
 }
