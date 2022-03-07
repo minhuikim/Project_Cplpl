@@ -3,18 +3,15 @@ using namespace std;
 
 int main()
 {
-	int v, a, b, goal = 1;
+	int v, a, b, goal;
 	cin >> a >> b >> v;
 
-	while (v > a)
-	{
-		v = v - a + b;
+	if((v - a) % (a - b) == 0)
+		goal = (v - a) / (a - b);
+	else
+		goal = (v - a) / (a - b) + 1;
 
-		if (v < 0)
-			break;
+	//goal = (v-a)%(v-b);
 
-		goal++;
-	}
-
-	cout << goal;
+	cout << goal + 1;
 }
