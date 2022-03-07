@@ -3,14 +3,14 @@ using namespace std;
 
 int main()
 {
-	int v, a, b, goal = 0;
+	int v, a, b, goal = 1;
 	cin >> a >> b >> v;
 
-	while (1)
+	while (v > a)
 	{
 		v = v - a + b;
 
-		if (v <= 0 || goal * a >= v)
+		if (v < 0)
 			break;
 
 		goal++;
