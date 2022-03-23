@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int getCnt(int n)
+int getCnt_5(int n)
 {
 	int x, y, cnt = 0, flag;
 
@@ -11,11 +11,6 @@ int getCnt(int n)
 	}
 	else
 	{
-		/*while (n)
-		{
-
-		}*/
-
 		if (n % 5 == 3)
 			cnt = n / 5 + 1;
 		else if (n % 3 == 0)
@@ -51,11 +46,19 @@ int getCnt(int n)
 }
 int main()
 {
-	int n;
+	int n, x, y;
 
 	cin >> n;
 
-	cout << getCnt(n);
+	x = getCnt_5(n);
+
+	//y = getCnt_3(n);
+
+	if (x > y)
+		cout << y;
+	else
+		cout << x;
+
 
 	return 0;
 }
