@@ -1,6 +1,5 @@
 #include <iostream>
-
-
+#include <string.h>
 
 void reverse(char arr[])
 {
@@ -17,8 +16,9 @@ int main()
 {
 	char strA[10002] = { 0 };
 	char strB[10002] = { 0 };
-	int len;
-
+	char ans[10003] = { 0 };
+	int len, up = 0;
+	
 	std::cin >> strA >> strB;
 
 	if (strA > strB)
@@ -29,7 +29,26 @@ int main()
 	reverse(strA);
 	reverse(strB);
 
-	std::cout << strA << " " << strB;
+	for (int i = 0; i < len; i++)
+	{
+		strA[i] = strA[i] - '0';
+		strB[i] = strB[i] - '0';
+
+		int c = strA[i] + strB[i] + up;
+		
+		while (c < 0) c += '0';
+
+		if (c > 9) up = 1;
+		else up = 0;
+
+		ans[i] = c % 10 + '0';
+	}
+
+	if (up == 1) ans[len] = '1';
+
+	reverse(ans);
+
+	std::cout << ans;
 
 	return 0;
 }
