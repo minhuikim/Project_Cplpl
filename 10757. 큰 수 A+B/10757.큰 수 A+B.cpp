@@ -4,6 +4,7 @@
 void reverse(char arr[])
 {
 	int len = strlen(arr);
+
 	for (int i = 0; i < len / 2; i++)
 	{
 		char x = arr[i];
@@ -21,34 +22,42 @@ int main()
 	
 	std::cin >> strA >> strB;
 
-	if (strA > strB)
+	if (strlen(strA) > strlen(strB))
+	{
 		len = strlen(strA);
+	}
 	else
+	{
 		len = strlen(strB);
+	}
 
 	reverse(strA);
 	reverse(strB);
 
 	for (int i = 0; i < len; i++)
 	{
-		strA[i] = strA[i] - '0';
-		strB[i] = strB[i] - '0';
+		if (!strA[i]) strA[i] = '0';
+		if (!strB[i]) strB[i] = '0';
 
-		int c = strA[i] + strB[i] + up;
-		
-		while (c < 0) c += '0';
+		int c = (strA[i] - '0') + (strB[i] - '0') + up;
 
-		if (c > 9) up = 1;
-		else up = 0;
+		if (c >= 10)
+		{
+			ans[i] = (c - 10) + '0';
+			up = 1;
+		}
+		else
+		{
+			ans[i] = c + '0';
+			up = 0;
+		}
 
-		ans[i] = c % 10 + '0';
+		if (i == len - 1 && up == 1)
+			ans[i + 1] = '1';
 	}
-
-	if (up == 1) ans[len] = '1';
 
 	reverse(ans);
 
 	std::cout << ans;
-
 	return 0;
 }
