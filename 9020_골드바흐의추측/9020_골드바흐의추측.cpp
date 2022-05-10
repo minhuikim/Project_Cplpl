@@ -9,7 +9,7 @@ int main()
 	{
 		if (i > 2 && i % 2 == 0) continue;
 
-		for (int j = 2; j < sizeof(dec) / 4; j++)
+		for (int j = 2; i * j < sizeof(dec) / 4; j++)
 		{
 			dec[i * j] = 1;
 		}
@@ -27,10 +27,10 @@ int main()
 
 		for (int j = h; j > 1; j--)
 		{
-			if (dec[j] == 1 && dec[n - j] == 1)
+			if (dec[j] == 0 && dec[n - j] == 0)
 			{
-				printf("%d\t%d\n", j, n - j);
-				continue;
+				printf("%d %d\n", j, n - j);
+				break;
 			}
 		}
 	}
