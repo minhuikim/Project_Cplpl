@@ -3,7 +3,19 @@
 
 int main()
 {
-	int t, n, n1, n2, a, b, flag;
+	int dec[10001] = { 0 };
+
+	for (int i = 2; i < sizeof(dec) / 4; i++)
+	{
+		if (i > 2 && i % 2 == 0) continue;
+
+		for (int j = 2; j < sizeof(dec) / 4; j++)
+		{
+			dec[i * j] = 1;
+		}
+	}
+
+	int t, n, flag, h;
 
 	scanf("%d", &t);
 
@@ -11,25 +23,18 @@ int main()
 	{
 		scanf("%d", &n);
 
-		flag = 0;
-		n1 = n / 2;
+		h = n / 2;
 
-		for (int j = 2; j <= n1; j++)
+		for (int j = h; j > 1; j--)
 		{
-			if (n1 % j == 0)
+			if (dec[j] == 1 && dec[n - j] == 1)
 			{
-				flag++;
+				printf("%d\t%d\n", j, n - j);
+				continue;
 			}
-			
-			if (flag == 2) break;
-
-			a = j;
 		}
-
-		b = n - a;
-
-		printf("%d %d", a, b);
 	}
+
 
 	return 0;
 }
