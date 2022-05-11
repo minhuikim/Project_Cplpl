@@ -3,16 +3,14 @@
 
 int main()
 {
+	int dec[123456 * 2 + 1] = {0, };
 	int n, cnt;
 
-	int dec[123457] = { 0 };
-
 	dec[1] = 1;
-	for (int i = 2; i <= 123456; i++)
+	for (int i = 2; i <= sizeof(dec)/4; i++)
 	{
-		if (dec[i] == 1) continue;
-
-		for (int j = 2; i * j <= 123456; j++)
+		if (i > 2 && i % 2 == 0) continue;
+		for (int j = 2; i * j <= sizeof(dec) / 4; j++)
 		{
 			dec[i * j] = 1;
 		}
@@ -20,19 +18,20 @@ int main()
 
 	while(1)
 	{
-		cnt = 0;
-
 		scanf("%d", &n);
 
 		if (n == 0) break;
 
-		for (int i = n; i <= n * 2; i++)
+		cnt = 0;
+
+		for (int i = n + 1; i <= n * 2; i++)
 		{
 			if (dec[i] == 0) cnt++;
 		}
 
-		printf("%d", cnt);
+		printf("%d\n", cnt);
 	}
+	
 
 	return 0;
 }
