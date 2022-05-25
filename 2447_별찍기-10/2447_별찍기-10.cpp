@@ -3,35 +3,74 @@
 #include <string>
 using namespace std;
 
-void p_star(int n, int s)
+int k_num(int n, int k)
 {
-	if (n == 0) return;
+	if (n == 1)
+		return k;
+	else
+		return k_num(n / 3, k + 1);
+}
 
-	if(s <= 0)
+void p_star(const int n, int i, int j, int k)
+{
+	if (j == 1) return;
+
+
+	if (i == 1)
 	{
 		printf("\n");
-		return p_star(n - 1, n);
+		return p_star(n, n, j - 1, k);
+	}
+
+	if (i % 2 != 0 && j % 2 != 0)
+	{
+		printf(" ");
+		return p_star(n, i - 1, j, k);
 	}
 	else
 	{
-		if (n % 2 == 0 && s % 2 == 0)
-		{
-			printf(" ");
-		}
-		else
-		{
-			printf("*");
-		}
-		return p_star(n, s - 1);
+		printf("*");
+		return p_star(n, i - 1, j, k);
+		
 	}
+
 	
 }
 
 int main()
 {
-	int n;
+	int n, k;
 
 	scanf("%d", &n);
 
-	p_star(n, n);
+	k = k_num(n, 0);
+
+	//p_star(n, 0, k);
+
+	n++;
+
+	p_star(n, n, n, k);
 }
+
+/*
+
+if (n == 0) return;
+
+	if(s == n)
+	{
+		printf("0\n");
+		return p_star(n - 1, 1, k);
+	}
+	else
+	{
+		if (n % 2 == 0 && s % 2 == 0)
+		{
+			printf("-");
+		}
+		else
+		{
+			printf("*");
+		}
+		return p_star(n, s + 1, k);
+	}
+	*/
