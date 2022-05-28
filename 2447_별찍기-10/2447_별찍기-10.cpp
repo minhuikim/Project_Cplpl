@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-void p_star(const int n, int i, int j)
+void p_star(const int n, int i, int j, int k)
 {
 	if (j == n) return;
 
@@ -11,18 +11,23 @@ void p_star(const int n, int i, int j)
 	if (i == n)
 	{
 		printf("\n");
-		return p_star(n, 0, j + 1);
+		return p_star(n, 0, j + 1, k);
 	}
 
-	if (i % 3 == 1 && j % 3 == 1)
+	if ((i / k) % 3 == 1 && (j / k) % 3 == 1)
 	{
 		printf(" ");
-		return p_star(n, i + 1, j);
+		return p_star(n, i + 1, j, k * 3);
+	}
+	else if (i % 3 == 1 && j % 3 == 1)
+	{
+		printf(" ");
+		return p_star(n, i + 1, j, k);
 	}
 	else
 	{
 		printf("*");
-		return p_star(n, i + 1, j);
+		return p_star(n, i + 1, j, k);
 		
 	}	
 }
@@ -34,5 +39,5 @@ int main()
 
 	scanf("%d", &n);
 
-	p_star(n, 0, 0);
+	p_star(n, 0, 0, 1);
 }
