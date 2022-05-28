@@ -1,34 +1,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string>
-using namespace std;
 
-void p_star(const int n, int i, int j, int k)
+void p_star(int i, int j, int n)
 {
-	if (j == n) return;
-
-
-	if (i == n)
-	{
-		printf("\n");
-		return p_star(n, 0, j + 1, k);
-	}
-
-	if ((i / k) % 3 == 1 && (j / k) % 3 == 1)
+	if ((i / n) % 3 == 1 && (j / n) % 3 == 1)
 	{
 		printf(" ");
-		return p_star(n, i + 1, j, k * 3);
 	}
-	else if (i % 3 == 1 && j % 3 == 1)
+	else if (n / 3 == 0)
 	{
-		printf(" ");
-		return p_star(n, i + 1, j, k);
+		printf("*");
 	}
 	else
 	{
-		printf("*");
-		return p_star(n, i + 1, j, k);
-		
+		p_star(i, j, n / 3);
 	}	
 }
 
@@ -39,5 +24,12 @@ int main()
 
 	scanf("%d", &n);
 
-	p_star(n, 0, 0, 1);
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			p_star(i, j, n);
+		}
+		printf("\n");
+	}
 }
